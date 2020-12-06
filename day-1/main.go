@@ -8,6 +8,12 @@ import (
 )
 
 func main() {
+	readFile(func(line string) {
+		fmt.Println(line)
+	})
+}
+
+func readFile(readerFunc func(string)) {
 	file, err := os.Open("./input.txt")
 	if err != nil {
 		log.Fatal(err)
@@ -16,7 +22,7 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		readerFunc(scanner.Text())
 	}
 
 	if err := scanner.Err(); err != nil {
