@@ -5,14 +5,20 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 )
 
 func main() {
+	inputs := []int{}
 	readFile(func(line string) {
-		fmt.Println(line)
+		num, _ := strconv.Atoi(line)
+		inputs = append(inputs, num)
 	})
+
+	fmt.Println(inputs)
 }
 
+// readFile reads the input file line by line and passes each line to the readerFunc
 func readFile(readerFunc func(string)) {
 	file, err := os.Open("./input.txt")
 	if err != nil {
